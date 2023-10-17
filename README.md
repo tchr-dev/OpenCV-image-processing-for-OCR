@@ -9,7 +9,7 @@ pip install -r requirements.txt
 
 ## Authors
 * **Gabriel Harris**
-* **tchr**
+* **Ivan Kovale**
 
 ## Changes
 - added main_cli.py
