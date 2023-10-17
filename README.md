@@ -9,3 +9,11 @@ pip install -r requirements.txt
 
 ## Authors
 * **Gabriel Harris**
+* **tchr**
+
+## Changes
+- added main_cli.py
+- resize shell script written in zsh
+- recognize shell script written in zsh
+- new implementation of sobel filter
+- updated requirements

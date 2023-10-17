@@ -85,12 +85,12 @@ def apply_adaptive_thresholding(img, method):
     )
 
 
+# New Implementation
 def apply_sobel_filter(img, direction):
     """
     Apply Sobel filter of first order (i.e. 1st derivative) along direction
 
     Direction could be along x (horizontally) or y (vertically)
-
 
     Useful to detect horizontal or vertical edges and are resistant to noise
 
@@ -107,18 +107,31 @@ def apply_sobel_filter(img, direction):
     )
 
     if direction == "h":
-        dx, dy = 0, 1
-
-    elif direction == "v":
         dx, dy = 1, 0
+    elif direction == "v":
+        dx, dy = 0, 1
+    else:
+        raise ValueError("Invalid direction. It must be either 'h' or 'v'.")
 
-    return cv2.Sobel(
+    sobel_output = cv2.Sobel(
         src=img,
         ddepth=cv2.CV_64F,
         dx=dx,
         dy=dy,
         ksize=3,
     )
+
+    # Normalize the Sobel output to be in range [0, 255]
+    sobel_output = cv2.normalize(sobel_output, None, 0, 255, cv2.NORM_MINMAX)
+    
+    # Convert float64 to uint8
+    sobel_output_uint8 = np.uint8(sobel_output)
+
+    # Convert the grayscale output to a 3-channel image
+    return cv2.cvtColor(sobel_output_uint8, cv2.COLOR_GRAY2RGB)
+
+
+
 
 
 def apply_laplacian_filter(img):
